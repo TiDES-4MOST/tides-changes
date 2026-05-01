@@ -236,8 +236,16 @@ def _process_transient(
                 transients=[transient],
                 survey=survey_name,
             )
-            pk_4most = submission_result.get("pk_4most")
-            ostd_u_obj_id = submission_result.get("ostd_u_obj_id")
+            if isinstance(submission_result, dict):
+                pk_4most = submission_result.get("pk_4most")
+                ostd_u_obj_id = submission_result.get("ostd_u_obj_id")
+            else:
+                logger.warning(
+                    "submit_transients returned an unexpected type %s for '%s'; "
+                    "4MOST IDs will not be recorded.",
+                    type(submission_result).__name__,
+                    name,
+                )
         else:
             logger.info("dry_run=True; skipping 4MOST submission for '%s'.", name)
 

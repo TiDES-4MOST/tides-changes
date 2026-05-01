@@ -46,10 +46,6 @@ CREATE TABLE IF NOT EXISTS tides.tideschanges_shared (
     CONSTRAINT uq_tideschanges_shared_name UNIQUE (transient_name)
 );
 
--- Index to speed up name-based lookups from both flows
-CREATE INDEX IF NOT EXISTS idx_tideschanges_shared_name
-    ON tides.tideschanges_shared (transient_name);
-
 -- Index to find all shared targets quickly
 CREATE INDEX IF NOT EXISTS idx_tideschanges_shared_is_shared
     ON tides.tideschanges_shared (is_shared);
